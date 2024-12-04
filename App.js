@@ -7,17 +7,17 @@ import { Text } from 'react-native';
 import ExpenseManager from './screens/ExpenseManager';
 import RecentExpenses from './screens/RecentExpenses';
 import AllExpenses from './screens/AllExpenses';
-import { GloalsStyles } from './constants/styles';
+import { GlobalStyles } from './constants/styles';
+
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 function ExpensesOverview() {
-  console.log('Rendering: ExpensesOverview');
   return <BottomTabs.Navigator screenOptions={{
-    headerStyle: {backgroundColor: GloalsStyles.colors.primary},
+    headerStyle: {backgroundColor: GlobalStyles.colors.primary500},
     headerTintColor: 'black',
-    tabBarStyle: {backgroundColor: GloalsStyles.colors.primary},
+    tabBarStyle: {backgroundColor: GlobalStyles.colors.primary500},
   }}>
     <BottomTabs.Screen name="RecentExpenses" component={RecentExpenses} options={{
       title: 'Recent Expenses',
