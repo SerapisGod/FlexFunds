@@ -3,7 +3,7 @@ import ExpensesSummary from "./ExpensesSummary";
 import ExpensesList from "./ExpensesList";
 import { GlobalStyles } from "../../constants/styles";
 
-const dummy_expenses = [
+export const dummy_expenses = [
     { id: 'e1', category: 'grocery', description: 'Toilet Paper', amount: 94.12, date: new Date(2022, 1, 17) },
     { id: 'e2', category: 'entertainment', description: 'New TV', amount: 799.49, date: new Date(2022, 4, 1) },
     { id: 'e3', category: 'billing', description: 'Car Insurance', amount: 294.67, date: new Date(2022, 10, 15) },

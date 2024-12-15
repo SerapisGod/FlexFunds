@@ -8,10 +8,17 @@ import ExpenseManager from './screens/ExpenseManager';
 import RecentExpenses from './screens/RecentExpenses';
 import AllExpenses from './screens/AllExpenses';
 import { GlobalStyles } from './constants/styles';
+import PiechartComp from './components/charts/piechartComp';
+import { dummy_expenses } from './components/ExpensesOutput.js/ExpenseOutput';
 
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
+
+function ExpenseChartScreen() {
+  return <PiechartComp expenses={dummy_expenses} />;
+}
+
 
 function ExpensesOverview() {
   return <BottomTabs.Navigator screenOptions={{
@@ -37,6 +44,17 @@ function ExpensesOverview() {
           )
         }}
       />
+    <BottomTabs.Screen
+      name="ExpenseChart"
+      component={ExpenseChartScreen}
+      options={{
+        title: 'Expense Chart',
+        tabBarLabel: 'Summary',
+        tabBarIcon: ({ color, size }) => (
+          <Text style={{ fontSize: size, color }}>📊</Text>
+        )
+      }}
+    />
   </BottomTabs.Navigator>
 }
 

@@ -72,13 +72,13 @@ const styles = StyleSheet.create({
   container: {
     // backgroundColor: GlobalStyles.colors.primary500,
     backgroundColor: GlobalStyles.colors.primary500,
-    flex: 0,
+    flex: 1,
     minHeight: 250,
     minWidth: 400,
     justifyContent: 'center', 
     alignItems: 'center', 
     padding: 20,
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
   legend: {
     flexDirection: 'column',
