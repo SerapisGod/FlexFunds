@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import React from 'react';
 import { PieChart } from 'react-native-gifted-charts';
 import chroma from 'chroma-js';
@@ -13,75 +13,68 @@ import { GlobalStyles } from '../../constants/styles';
 // npm install react-native-linear-gradient
 // npm install chroma-js
 
-function getUniqueCategory(expenseItems) {
-  // Get unique categories
-  const uniqueCategory = new Set(expenseItems.map((item) => item.category));
-  return Array.from(uniqueCategory);
-}
-
 const PiechartComp = ({ expenses }) => {
-  const uniqueCategories = getUniqueCategory(expenses);
-  // Unique Colors for each expense category
-  const generateColors = chroma.scale('Set3').colors(uniqueCategories.length);
+  if (expenses.length === 0) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.normalText}>No data available</Text>
+      </View>
+    );
+  }
 
-  let chartData = [];
-  
-  // This takes a category, adds the amount, then adds it to chartData
-  uniqueCategories.map((categ, index) => {
-    let chartDataObj = {
-      value: 0,
-      label: '',
-      color: '',
+  // Generate a set of colors based on the number of items
+  const generateColors = chroma.scale("Set3").colors(expenses.length);
+
+  const chartData = expenses.map((expense, index) => {
+    return {
+      value: expense.amount,
+      label: expense.description,
+      color: generateColors[index % generateColors.length],
     };
-    const filteredCategory = expenses.filter((item) => item.category === categ);
-    chartDataObj.value = filteredCategory.reduce((accumulator, item) => accumulator + item.amount, 0);
-    chartDataObj.label = categ;
-    chartDataObj.color = generateColors[index];
-    chartData.push(chartDataObj);
   });
-  
-  console.log(uniqueCategories);
+
   return (
     <View style={styles.container}>
-      <PieChart 
+      <PieChart
         data={chartData}
         doughnut={false}
         isAnimated={true}
-        style={styles.pieChart}
         borderWidth={2}
         showValuesAsLabels={true}
       />
       <View style={styles.legend}>
         {chartData.map((item, index) => (
           <View key={index} style={styles.legendItem}>
-            <View style={{
-              width: 20,
-              height: 20,
-              marginRight: 5,
-              backgroundColor: item.color,
-            }} />
+            <View
+              style={{
+                width: 20,
+                height: 20,
+                marginRight: 5,
+                backgroundColor: item.color,
+              }}
+            />
             <Text style={styles.normalText}>{item.label}</Text>
           </View>
         ))}
       </View>
     </View>
   );
-}
+};
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: GlobalStyles.colors.primary500,
-    backgroundColor: GlobalStyles.colors.primary500,
+    backgroundColor: GlobalStyles.colors.primary700,
     flex: 1,
     minHeight: 250,
-    minWidth: 400,
-    justifyContent: 'center', 
-    alignItems: 'center', 
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
     flexDirection: 'column',
   },
   legend: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: 10,
     marginLeft: 10,

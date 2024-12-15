@@ -1,4 +1,14 @@
-export function getFormattedDate(date) {
-    return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+export function getFormattedDate(dateInput) {
+  const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
+
+  if (date instanceof Date && !isNaN(date)) {
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  } else {
+    console.error("Invalid date:", dateInput);
+    return "Invalid date";
   }
-  
+}

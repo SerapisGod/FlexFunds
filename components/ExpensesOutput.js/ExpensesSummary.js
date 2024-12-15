@@ -1,19 +1,22 @@
 import { View, Text, StyleSheet } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 
-
 function ExpensesSummary({ expenses, periodName }) {
-    console.log('Expenses:', expenses);
-    console.log('Period Name:', periodName);
-
-    const expensesTotal = expenses.reduce((sum, expense) => {
+    // Calculate total expense amount
+    const expensesTotal = expenses?.reduce((sum, expense) => {
         return sum + expense.amount;
-    }, 0);
+    }, 0) || 0;
+
+    // Format total amount as currency
+    const formattedTotal = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    }).format(expensesTotal);
 
     return (
         <View style={styles.container}>
             <Text style={styles.period}>{periodName}</Text>
-            <Text style={styles.sum}>${expensesTotal.toFixed(2)}</Text>
+            <Text style={styles.sum}>{formattedTotal}</Text>
         </View>
     );
 }
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
         backgroundColor: GlobalStyles.colors.primary50,
-        borderRadius: 8
+        borderRadius: 8,
     },
     period: {
         fontSize: 15,
@@ -37,5 +40,5 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         color: GlobalStyles.colors.primary500,
-    }
-}); 
+    },
+});
