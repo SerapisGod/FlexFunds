@@ -123,7 +123,10 @@ export default function App() {
       });
       if (!response.ok) throw new Error("Failed to add expense");
       const addedExpense = await response.json();
-      setExpenses((current) => [...current, addedExpense]);
+      setExpenses((current) => [
+        ...current.filter((expense) => expense.id !== addedExpense.id),
+        { ...addedExpense, date: new Date(addedExpense.date) },
+      ]);
     } catch (error) {
       console.error("Add error:", error.message);
     }
