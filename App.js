@@ -29,10 +29,10 @@ function ExpensesTabs({ expenses, deleteExpense, navigation }) {
     <BottomTabs.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
-        headerTintColor: "white",
+        headerTintColor: { backgroundColor: GlobalStyles.colors.primary800 },
         tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
         tabBarLabelStyle: { color: GlobalStyles.colors.primary50, fontSize: 12 },
-        tabBarActiveTintColor: "white", 
+        tabBarActiveTintColor: { backgroundColor: GlobalStyles.colors.primary500 }, 
         tabBarInactiveTintColor: GlobalStyles.colors.primary200,
       }}
     >
