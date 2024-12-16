@@ -4,6 +4,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Text } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 
 import ExpenseManager from "./screens/ExpenseManager";
 import RecentExpenses from "./screens/RecentExpenses";
@@ -29,11 +31,11 @@ function ExpensesTabs({ expenses, deleteExpense, navigation }) {
     <BottomTabs.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
-        headerTintColor: { backgroundColor: GlobalStyles.colors.primary800 },
+        headerTintColor: { color: GlobalStyles.colors.primary800, fontSize: 80},
+        headerTitleStyle: { fontWeight: 'bold' },
         tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
-        tabBarLabelStyle: { color: GlobalStyles.colors.primary50, fontSize: 12 },
-        tabBarActiveTintColor: { backgroundColor: GlobalStyles.colors.primary500 }, 
-        tabBarInactiveTintColor: GlobalStyles.colors.primary200,
+        tabBarActiveTintColor: { backgroundColor: GlobalStyles.colors.primary800 }, 
+        tabBarInactiveTintColor: { backgroundColor: GlobalStyles.colors.primary700 },
       }}
     >
       <BottomTabs.Screen
@@ -47,9 +49,9 @@ function ExpensesTabs({ expenses, deleteExpense, navigation }) {
         )}
         options={{
           title: "Recent Expenses",
-          tabBarLabel: "Recent",
+          tabBarLabel: () => null,
           tabBarIcon: ({ color, size }) => (
-            <Text style={{ fontSize: size, color }}>⏳</Text>
+            <Icon name="clock" size={size} color={color} />
           ),
         }}
       />
@@ -64,9 +66,9 @@ function ExpensesTabs({ expenses, deleteExpense, navigation }) {
         )}
         options={{
           title: "All Expenses",
-          tabBarLabel: "All Expenses",
+          tabBarLabel: () => null,
           tabBarIcon: ({ color, size }) => (
-            <Text style={{ fontSize: size, color }}>🧾</Text>
+            <Icon name="money-bill" size={size} color={color} />
           ),
         }}
       />
@@ -75,9 +77,9 @@ function ExpensesTabs({ expenses, deleteExpense, navigation }) {
         children={() => <ExpenseChartScreen expenses={expenses} />}
         options={{
           title: "Expense Chart",
-          tabBarLabel: "Summary",
+          tabBarLabel: () => null,
           tabBarIcon: ({ color, size }) => (
-            <Text style={{ fontSize: size, color }}>📊</Text>
+            <Icon name="chart-pie" size={size} color={color} />
           ),
         }}
       />
@@ -123,10 +125,7 @@ export default function App() {
       });
       if (!response.ok) throw new Error("Failed to add expense");
       const addedExpense = await response.json();
-      setExpenses((current) => [
-        ...current.filter((expense) => expense.id !== addedExpense.id),
-        { ...addedExpense, date: new Date(addedExpense.date) },
-      ]);
+      setExpenses((current) => [...current, addedExpense]);
     } catch (error) {
       console.error("Add error:", error.message);
     }
@@ -172,6 +171,7 @@ export default function App() {
               <AddExpenseForm
                 addExpenseFunc={addExpense}
                 navigation={navigation}
+                backgroundColor={GlobalStyles.colors.primary100}
               />
             )}
             options={{ title: "Add Expense" }}

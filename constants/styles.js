@@ -1,7 +1,7 @@
 export const GlobalStyles = {
     colors: {
-        primary50: '#F1FFFA',   
-        primary100: '#C9FFE2', 
+        primary50: '#e9f5db',   
+        primary100: '#c7f9cc', 
         primary200: '#B6F9C9',  // Soft medium blue, approachable
         primary400: '#96E8BC',  // Brighter blue, energizing yet professional
         primary500: '#7DD181',  // Rich medium blue, trust and reliability

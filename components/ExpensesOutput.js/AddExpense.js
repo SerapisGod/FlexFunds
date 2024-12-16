@@ -49,6 +49,7 @@ const AddExpenseForm = ({ addExpenseFunc }) => {
   };
 
   return (
+    <View style={styles.outerContainer}>
     <View style={styles.container}>
       <TextInput
         style={styles.inputBox}
@@ -72,6 +73,7 @@ const AddExpenseForm = ({ addExpenseFunc }) => {
         <Text style={styles.buttonText}>Add</Text>
       </TouchableOpacity>
     </View>
+  </View>
   );
 };
 
@@ -79,31 +81,45 @@ export default AddExpenseForm;
 
 const styles = StyleSheet.create({
   container: {
+    width: "90%",
+    maxWidth: 400,
     justifyContent: "center",
+    borderRadius: 8,
+    padding: 20,
     alignItems: "center",
     margin: 10,
-    color: GlobalStyles.colors.primary50,
+    backgroundColor: GlobalStyles.colors.primary50,
   },
   inputBox: {
-    width: "80%",
-    height: 40,
+    width: "95%",
+    maxWidth: 400,
+    height: 50,
     padding: 10,
+    marginVertical: 8,
     margin: 5,
-    fontSize: 15,
+    fontSize: 16,
     borderRadius: 7,
-    color: GlobalStyles.colors.primary50,
+    color: 'black',
     backgroundColor: GlobalStyles.colors.primary400,
   },
   button: {
     marginTop: 10,
     backgroundColor: GlobalStyles.colors.primary800,
     borderRadius: 7,
-    paddingVertical: 10,
+    paddingVertical: 12,
     paddingHorizontal: 20,
   },
   buttonText: {
     color: GlobalStyles.colors.primary50,
     fontWeight: "bold",
     textAlign: "center",
+  },
+
+  outerContainer: {
+    flex: 1,
+    backgroundColor: GlobalStyles.colors.primary50,
+    padding: 16,
+    justifyContent: 'center', // Centers content vertically
+    alignItems: 'center',
   },
 });

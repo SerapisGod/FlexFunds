@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
+import { GlobalStyles } from '../constants/styles';
+
 
 const AddExpenseForm = ({ addExpense }) => { // Use addExpense here
   const [newExpense, setNewExpense] = useState({
@@ -75,6 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: "center",
+    backgroundColor: Gprimary100lobalStyles.colors.,
   },
   input: {
     borderBottomWidth: 1,
