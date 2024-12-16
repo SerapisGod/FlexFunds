@@ -23,7 +23,7 @@ const PiechartComp = ({ expenses }) => {
   }
 
   // Generate a set of colors based on the number of items
-  const generateColors = chroma.scale("Set3").colors(expenses.length);
+  const generateColors = ['#70d6ff', '#ff70a6', '#70e000', '#ffa200', '#e9ff70', '#ff9770', '#c77dff'];
 
   const chartData = expenses.map((expense, index) => {
     return {
@@ -74,16 +74,16 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   legend: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     flexWrap: 'wrap',
-    marginTop: 10,
+    marginTop: 20,
     marginLeft: 10,
   },
   legendItem: {
     flexDirection: 'row',
     alignItems: 'center',
     marginRight: 10,
-    marginBottom: 5,
+    marginBottom: 20,
   },
   normalText: {
     fontSize: 14,
