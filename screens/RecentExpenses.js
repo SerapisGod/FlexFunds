@@ -39,7 +39,7 @@ export default RecentExpenses;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: GlobalStyles.colors.primary100,
+    backgroundColor: GlobalStyles.colors.primary50,
     padding: 16,
   },
   plusButton: {

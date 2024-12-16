@@ -17,7 +17,7 @@ function ExpenseItem({ description, date, amount, onDelete }) {
           </View>
           <Button
             title="Delete"
-            color={GlobalStyles.colors.primary50}
+            color={GlobalStyles.colors.primary700}
             onPress={onDelete}
           />
         </View>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         padding: 13,
         marginVertical: 10,
-        backgroundColor: GlobalStyles.colors.primary500,
+        backgroundColor: GlobalStyles.colors.primary600,
         borderRadius: 8,
         elevation: 5,
         shadowColor: GlobalStyles.colors.gray500,
@@ -42,13 +42,13 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.5,
     },
     textBase: {
-        color: GlobalStyles.colors.primary50,
+        color: GlobalStyles.colors.primary800,
     },
     description: {
         fontSize: 16,
         fontWeight: "bold",
         marginBottom: 5,
-        color: GlobalStyles.colors.primary50,
+        color: 'black',
     },
     amountContainer: {
         paddingHorizontal: 11,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     },
     amount: {
         fontWeight: "bold",
-        color: GlobalStyles.colors.primary500,
+        color: GlobalStyles.colors.primary700,
     },
     rightContainer: {
         flexDirection: "row",

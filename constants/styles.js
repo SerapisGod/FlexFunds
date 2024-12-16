@@ -4,7 +4,8 @@ export const GlobalStyles = {
         primary100: '#c7f9cc', 
         primary200: '#B6F9C9',  // Soft medium blue, approachable
         primary400: '#96E8BC',  // Brighter blue, energizing yet professional
-        primary500: '#7DD181',  // Rich medium blue, trust and reliability
+        primary500: '#A9E18E',  // Rich medium blue, trust and reliability
+        primary600: '#7DD181', //6CB66E
         primary700: '#4B7F52',  // Deeper blue, grounded and serious
         primary800: '#464E47',  // Dark blue, stability and focus
         accent500: '#f7bc0c',

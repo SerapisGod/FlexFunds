@@ -153,7 +153,12 @@ export default function App() {
     <>
       <StatusBar style="auto" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="ExpensesTabs">
+        <Stack.Navigator 
+          initialRouteName="ExpensesTabs"
+          screenOptions={{
+            headerBackTitleVisible: false, // Remove back button text globally
+          }}
+        >
           <Stack.Screen
             name="ExpensesTabs"
             children={({ navigation }) => (
@@ -171,10 +176,14 @@ export default function App() {
               <AddExpenseForm
                 addExpenseFunc={addExpense}
                 navigation={navigation}
-                backgroundColor={GlobalStyles.colors.primary100}
               />
             )}
-            options={{ title: "Add Expense" }}
+            options={{ 
+              title: "Add Expense",
+              headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+              headerTintColor: "black",
+              headerTitleStyle: { fontWeight: "bold" },
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

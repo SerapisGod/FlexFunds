@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: "center",
-    backgroundColor: Gprimary100lobalStyles.colors.,
+    backgroundColor: GlobalStyles.colors.primary100,
   },
   input: {
     borderBottomWidth: 1,

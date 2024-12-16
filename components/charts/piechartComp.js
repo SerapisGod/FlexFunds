@@ -24,7 +24,7 @@ const PiechartComp = ({ expenses }) => {
   }
 
   // Generate a set of colors based on the number of items
-  const generateColors = ['#70d6ff', '#ff70a6', '#70e000', '#ffa200', '#e9ff70', '#ff9770', '#c77dff'];
+  const generateColors = ['#40E0D0', '#ff70a6', '#70e000', '#ffa200', '#e9ff70', '#ff9770', '#c77dff', '#228B22', '#76E800', '#FF5F3D', '#FF91A4', '#FFD700', '#98FB98', '#A67B5B', '#A9A9A9', '#4B0082', '#D50032', '#00B0B9'];
 
   const chartData = expenses.map((expense, index) => {
     return {
@@ -43,7 +43,7 @@ const PiechartComp = ({ expenses }) => {
         borderWidth={2}
         showValuesAsLabels={true}
         radius={190}
-        innerCircleColor={GlobalStyles.colors.primary700} 
+        innerCircleColor={GlobalStyles.colors.primary50} 
         centerLabelComponent={() => (
           <Text style={styles.centerLabel}>Expenses</Text>
         )}
@@ -75,7 +75,7 @@ const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.primary700,
+    backgroundColor: GlobalStyles.colors.primary50,
     flex: 1,
     minHeight: 250,
     justifyContent: 'center',
@@ -97,12 +97,12 @@ const styles = StyleSheet.create({
   normalText: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: GlobalStyles.colors.primary50,
+    color: GlobalStyles.colors.primary800,
   },
   centerLabel: {
     fontSize: 18,      // Adjust the font size as needed
     fontWeight: 'bold',
-    color: 'white',  // Replace with your desired color (e.g., hex, rgb, or named color)
+    color: 'black',  // Replace with your desired color (e.g., hex, rgb, or named color)
     textAlign: 'center',
   },
 });

@@ -29,7 +29,7 @@ export default AllExpenses;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: GlobalStyles.colors.primary200,
+    backgroundColor: GlobalStyles.colors.primary50,
     padding: 16,
   },
   plusButton: {
@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
   plusText: {
     fontSize: 32,             // Large plus sign
     fontWeight: 'bold',
-    color: '#fff',            // White color for the text
+    color: '#primary50',            // White color for the text
   },
 });
