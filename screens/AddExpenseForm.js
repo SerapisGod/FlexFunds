@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
-import { GlobalStyles } from '../constants/styles';
-
 
 const AddExpenseForm = ({ addExpense }) => { // Use addExpense here
   const [newExpense, setNewExpense] = useState({
@@ -15,34 +13,21 @@ const AddExpenseForm = ({ addExpense }) => { // Use addExpense here
       console.warn("All fields are required!");
       return;
     }
-
+  
+    // Ensure the date is always valid
+    const expenseDate = newExpense.date instanceof Date 
+      ? newExpense.date 
+      : new Date(); // Fallback to current date
+  
+    const expenseData = {
+      description: newExpense.description,
+      amount: parseFloat(newExpense.amount),
+      date: expenseDate.toISOString(), // Safe to use
+    };
+  
     try {
-      const response = await fetch(
-        "https://675e5d6d63b05ed0797a018b.mockapi.io/forexpenses",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            description: newExpense.description,
-            amount: parseFloat(newExpense.amount),
-            date: newExpense.date.toISOString(),
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to add expense. Try again!");
-      }
-
-      const addedExpense = await response.json();
-      console.log("Expense added:", addedExpense);
-
-      // Call the addExpense function passed as a prop
-      addExpense(addedExpense);
-
-      // Reset form fields
-      setNewExpense({ description: "", amount: "", date: new Date() });
-      navigation.goBack();
+      await addExpense(expenseData); // Pass to parent function
+      setNewExpense({ description: "", amount: "", date: new Date() }); // Reset form
     } catch (error) {
       console.error("Error adding expense:", error.message);
     }
@@ -77,7 +62,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: "center",
-    backgroundColor: GlobalStyles.colors.primary100,
   },
   input: {
     borderBottomWidth: 1,

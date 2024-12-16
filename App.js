@@ -118,14 +118,27 @@ export default function App() {
 
   const addExpense = async (newExpense) => {
     try {
+      const expenseDate =
+        newExpense.date instanceof Date ? newExpense.date : new Date(); // Ensure valid date
+  
       const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newExpense),
+        body: JSON.stringify({
+          ...newExpense,
+          date: expenseDate.toISOString(), // Safe to call now
+        }),
       });
+  
       if (!response.ok) throw new Error("Failed to add expense");
+  
       const addedExpense = await response.json();
-      setExpenses((current) => [...current, addedExpense]);
+  
+      // Add the expense to the local state
+      setExpenses((current) => [
+        ...current,
+        { ...addedExpense, date: new Date(addedExpense.date) },
+      ]);
     } catch (error) {
       console.error("Add error:", error.message);
     }
