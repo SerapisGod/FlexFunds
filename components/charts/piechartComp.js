@@ -3,6 +3,7 @@ import React from 'react';
 import { PieChart } from 'react-native-gifted-charts';
 import chroma from 'chroma-js';
 import { GlobalStyles } from '../../constants/styles';
+import { FlatList } from 'react-native';
 
 // This component will take expenses, categorize them,
 // then create a pie chart with different colors.
@@ -41,10 +42,17 @@ const PiechartComp = ({ expenses }) => {
         isAnimated={true}
         borderWidth={2}
         showValuesAsLabels={true}
+        radius={190}
+        innerCircleColor={GlobalStyles.colors.primary700} 
+        centerLabelComponent={() => (
+          <Text style={styles.centerLabel}>Expenses</Text>
+        )}
       />
-      <View style={styles.legend}>
-        {chartData.map((item, index) => (
-          <View key={index} style={styles.legendItem}>
+      <FlatList
+        data={chartData}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.legendItem}>
             <View
               style={{
                 width: 20,
@@ -55,8 +63,10 @@ const PiechartComp = ({ expenses }) => {
             />
             <Text style={styles.normalText}>{item.label}</Text>
           </View>
-        ))}
-      </View>
+        )}
+        numColumns={2} // Creates two columns
+        contentContainerStyle={styles.legend}
+      />
     </View>
   );
 };
@@ -74,21 +84,26 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   legend: {
-    flexDirection: 'column',
-    flexWrap: 'wrap',
     marginTop: 20,
-    marginLeft: 10,
+    paddingBottom: 20,
+    justifyContent: 'space-between',
   },
   legendItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 10,
-    marginBottom: 20,
+    marginBottom: 10,
+    width: (width / 2) - 30, // Ensures even spacing for two columns
   },
   normalText: {
     fontSize: 14,
     fontWeight: 'bold',
     color: GlobalStyles.colors.primary50,
+  },
+  centerLabel: {
+    fontSize: 18,      // Adjust the font size as needed
+    fontWeight: 'bold',
+    color: 'white',  // Replace with your desired color (e.g., hex, rgb, or named color)
+    textAlign: 'center',
   },
 });
 
