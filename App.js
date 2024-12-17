@@ -100,15 +100,26 @@ export default function App() {
     try {
       setIsLoading(true);
       const response = await fetch(API_URL);
+  
       if (!response.ok) throw new Error("Failed to fetch expenses");
+  
       const data = await response.json();
   
-      const formattedData = data.map((expense) => ({
-        ...expense,
-        date: new Date(expense.date),
-      }));
+      // Ensure uniqueness by ID
+      const uniqueExpenses = [];
+      const seenIds = new Set();
   
-      setExpenses(formattedData);
+      data.forEach((expense) => {
+        if (!seenIds.has(expense.id)) {
+          seenIds.add(expense.id);
+          uniqueExpenses.push({
+            ...expense,
+            date: new Date(expense.date), // Ensure date is a Date object
+          });
+        }
+      });
+  
+      setExpenses(uniqueExpenses); // Replace the state
     } catch (error) {
       console.error("Fetch error:", error.message);
     } finally {
@@ -116,29 +127,10 @@ export default function App() {
     }
   };
 
-  const addExpense = async (newExpense) => {
+  const addExpense = async () => {
     try {
-      const expenseDate =
-        newExpense.date instanceof Date ? newExpense.date : new Date(); // Ensure valid date
-  
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...newExpense,
-          date: expenseDate.toISOString(), // Safe to call now
-        }),
-      });
-  
-      if (!response.ok) throw new Error("Failed to add expense");
-  
-      const addedExpense = await response.json();
-  
-      // Add the expense to the local state
-      setExpenses((current) => [
-        ...current,
-        { ...addedExpense, date: new Date(addedExpense.date) },
-      ]);
+      await fetchExpenses(); // Refresh the expenses from the server
+      console.log("Expenses refreshed after adding.");
     } catch (error) {
       console.error("Add error:", error.message);
     }
